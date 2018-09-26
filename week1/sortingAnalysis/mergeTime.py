@@ -60,6 +60,7 @@ fifteenTime = 0
 twentyTime = 0
 twentyFiveTime = 0
 thirtyTime = 0
+thirtyFiveTime = 0
 
     #create lists
 fiveK = []
@@ -68,6 +69,7 @@ fifteenK = []
 twentyK = []
 twentyFiveK = []
 thirtyK = []
+thirtyFiveK = []
     #fill lists with random numbers
 for i in range(5000):
     fiveK.append(random.randint(randBot,randTop))
@@ -81,7 +83,9 @@ for i in range(25000):
     twentyFiveK.append(random.randint(randBot,randTop))
 for i in range(30000):
     thirtyK.append(random.randint(randBot,randTop))
-    
+for i in range(35000):
+    thirtyFiveK.append(random.randint(randBot,randTop))
+   
     #sort the lists and record time
 startTime = time.time()
 fiveK = mergeSort(fiveK)
@@ -113,6 +117,11 @@ thirtyK = mergeSort(thirtyK)
 endTime = time.time()
 thirtyTime = endTime - startTime
 
+startTime = time.time()
+thirtyFiveK = mergeSort(thirtyFiveK)
+endTime = time.time()
+thirtyFiveTime = endTime - startTime
+
 #with open("mergeTimes.txt","w") as fi:
 #    fi.write("Input (n)\tTime\n")
 #    fi.write("5000\t%s\n" % fiveTime)
@@ -121,6 +130,7 @@ thirtyTime = endTime - startTime
 #    fi.write("20000\t%s\n" % twentyTime)
 #    fi.write("25000\t%s\n" % twentyFiveTime)
 #    fi.write("30000\t%s\n" % thirtyTime)
+#    fi.write("35000\t%s\n" % thirtyFiveTime)
 
 print("Input (n)\tTime\n")
 print("5000\t%s\n" % fiveTime)
@@ -129,3 +139,4 @@ print("15000\t%s\n" % fifteenTime)
 print("20000\t%s\n" % twentyTime)
 print("25000\t%s\n" % twentyFiveTime)
 print("30000\t%s\n" % thirtyTime)
+print("35000\t%s\n" % thirtyFiveTime)

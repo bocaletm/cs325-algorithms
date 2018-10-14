@@ -14,10 +14,10 @@ def knapsack(limit,items,priceWeight):
     for i in range(1,items+1):
         for l in range(1,limit+1):
                     #check item weight against column limit
-            if priceWeight[i-1][0] <= l:
+            if priceWeight[i-1][1] <= l:
                     #use item
-                if (priceWeight[i-1][1] + table[i-1][l-priceWeight[i-1][0]]) > table[i-1][l]:
-                    table[i][l] = priceWeight[i-1][1] + table[i-1][l-priceWeight[i-1][0]]                        #add used item index to cart
+                if (priceWeight[i-1][0] + table[i-1][l-priceWeight[i-1][1]]) > table[i-1][l]:
+                    table[i][l] = priceWeight[i-1][0] + table[i-1][l-priceWeight[i-1][1]]                        #add used item index to cart
                 else:
                     #discard item
                     table[i][l] =  table[i-1][l]
@@ -36,21 +36,11 @@ def knapsack(limit,items,priceWeight):
     cart.total = table[items][limit]
     return cart
 
-priceWeight = [[32,16],[43,12],[26,4],[50,8],[20,3],[27,9]]
-limit = 25
-items = 6
-shopping = knapsack(limit,items,priceWeight)
-print(shopping.items)
-print(shopping.total)
-limit = 23
-shopping = knapsack(limit,items,priceWeight)
-print(shopping.items)
-print(shopping.total)
-limit = 21
-shopping = knapsack(limit,items,priceWeight)
-print(shopping.items)
-print(shopping.total)
-limit = 19
+priceWeight = [[72,17],[44,23],[31,24]]
+#priceWeight = [[17,72],[23,44],[24,31]]
+
+limit = 26
+items = 3
 shopping = knapsack(limit,items,priceWeight)
 print(shopping.items)
 print(shopping.total)

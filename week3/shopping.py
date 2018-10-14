@@ -24,40 +24,54 @@ def readList(items,data,times):
         for j in range(times):
             timesList.insert(len(timesList),data.pop(0))
         itemList.append(list(timesList))
-        timesList.clear()
+        timesList[:] = []
     return itemList
         
 #knapsack function returns max value and items
 def knapsack(limit,items,priceWeight):
     itemsInCart = []
         #create table
-    table = []
-    for row in range(items+1):
-        table += [[0]*(limit+1)]
-    for i in range(1,items+1):
-        for l in range(1,limit+1):
+#    table = []
+#    for row in range(items+1):
+#        table += [[0]*(limit+1)]
+    table = [[0 for l in range(limit+1)]
+                for i in range(items+1)]
+    for i in range(items+1):
+        for l in range(limit+1):
+            if i == 0 or l == 0:
+                table[i][l] = 0
                     #check item weight against column limit
-            if priceWeight[i-1][0] <= l:
+            elif priceWeight[i-1][1] <= l:
                     #use item
-                if (priceWeight[i-1][1] + table[i-1][l-priceWeight[i-1][0]]) > table[i-1][l]:
-                    table[i][l] = priceWeight[i-1][1] + table[i-1][l-priceWeight[i-1][0]]                        
-                    #add used item index to cart
+                if (priceWeight[i-1][0] + table[i-1][l-priceWeight[i-1][1]]) > table[i-1][l]:
+                    table[i][l] = priceWeight[i-1][0] + table[i-1][l-priceWeight[i-1][1]]                        
                 else:
                     #discard item
                     table[i][l] =  table[i-1][l]
             else:
                 table[i][l] = table[i-1][l]
-        #get the sequence of added item weights    
-    count = 0
-    for i in range(items+1):
-        if table[i][limit] > count:
-            itemsInCart.append(table[i][limit] - count)
-            count += table[i][limit]
+        #get the sequence of added item weights   
+        #Reference: https://stackoverflow.com/questions/49715583/get-the-element-of-a-list-in-knapsack-0-1
+    tmpW = limit
+    total = table[items][limit]
+    for i in range(items,0,-1):
+        if total <= 0:
+            break
+        if total == table[i-1][tmpW]:
+            continue
+        else:
+            #itemsInCart.append(priceWeight[i-1][1])
+            itemsInCart.insert(0,i)
+            total -= priceWeight[i-1][0] 
+            tmpW -= priceWeight[i-1][1]
                 
                 #wrap cart items and max in object
     cart = shoppingCart()
-    cart.items = set(itemsInCart)
+    cart.items = itemsInCart
     cart.total = table[items][limit]
+   # for i in range(items+1):
+   #     print(table[i])
+   # print()
     return cart
 
     
@@ -72,16 +86,15 @@ def shopping(items,priceWeight,familyMembers,familyWeights):
     for i in range(familyMembers):
        familyCarts.append(knapsack(int(familyWeights[i][0]),items,priceWeight))
        price += familyCarts[i].total
-    print("Total Price: ", price)
-    print("Member Items: ")
+    print("Total Price: ", price, file=open("shopping.out","a"))
+    print("Member Items: ", file=open("shopping.out","a"))
     for j in range(familyMembers):
-        print(j+1,familyCarts[i].items)
-    print(familyCarts)
+        print(j+1,"->", familyCarts[j].items,file=open("shopping.out","a"))
 
 ############
 # main
 ############
-
+import os
 #read file
 inputFile = open("shopping.txt", "r")
 data = []
@@ -91,21 +104,20 @@ inputFile.close()
 
     #typecast to int
 data = list(map(int,data))
-print(data)
 
 #triage file data
 testCases = readOne(data) 
 
 priceWeight = []
 familyWeights = []
-
+os.remove("shopping.out")
 for i in range(testCases):
     items = readOne(data)
     priceWeight.extend(readList(items,data,2))
     familyMembers = readOne(data)
     familyWeights.extend(readList(familyMembers,data,1))
         #calculate and print results
-    print("Test Case", i+1)
+    print("Test Case:", i+1,file=open("shopping.out","a"))
     shopping(items,priceWeight,familyMembers,familyWeights)
-    priceWeight.clear()
-    familyWeights.clear()
+    priceWeight[:] = []
+    familyWeights[:] = []

@@ -77,10 +77,6 @@ def knapsack(limit,items,priceWeight):
     
 #calculate and print results
 def shopping(items,priceWeight,familyMembers,familyWeights):
-    #print(items)
-    #print(priceWeight)
-    #print(familyMembers)
-    #print(familyWeights)
     familyCarts = []
     price = 0
     for i in range(familyMembers):
@@ -95,6 +91,12 @@ def shopping(items,priceWeight,familyMembers,familyWeights):
 # main
 ############
 import os
+import os.path
+#delete old output files
+PATH = './shopping.out'
+if os.path.isfile(PATH):
+    os.remove("shopping.out")
+
 #read file
 inputFile = open("shopping.txt", "r")
 data = []
@@ -110,7 +112,8 @@ testCases = readOne(data)
 
 priceWeight = []
 familyWeights = []
-os.remove("shopping.out")
+
+
 for i in range(testCases):
     items = readOne(data)
     priceWeight.extend(readList(items,data,2))

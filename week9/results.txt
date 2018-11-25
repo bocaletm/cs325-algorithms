@@ -1,0 +1,80 @@
+Test Case  1
+	First Fit:  20
+	First Fit Decreasing:  18
+	Best Fit:  33
+Test Case  2
+	First Fit:  22
+	First Fit Decreasing:  36
+	Best Fit:  50
+Test Case  3
+	First Fit:  45
+	First Fit Decreasing:  83
+	Best Fit:  86
+Test Case  4
+	First Fit:  30
+	First Fit Decreasing:  77
+	Best Fit:  73
+Test Case  5
+	First Fit:  18
+	First Fit Decreasing:  40
+	Best Fit:  33
+Test Case  6
+	First Fit:  32
+	First Fit Decreasing:  57
+	Best Fit:  51
+Test Case  7
+	First Fit:  13
+	First Fit Decreasing:  32
+	Best Fit:  27
+Test Case  8
+	First Fit:  34
+	First Fit Decreasing:  39
+	Best Fit:  37
+Test Case  9
+	First Fit:  2
+	First Fit Decreasing:  4
+	Best Fit:  2
+Test Case  10
+	First Fit:  32
+	First Fit Decreasing:  45
+	Best Fit:  40
+Test Case  11
+	First Fit:  32
+	First Fit Decreasing:  48
+	Best Fit:  44
+Test Case  12
+	First Fit:  4
+	First Fit Decreasing:  6
+	Best Fit:  4
+Test Case  13
+	First Fit:  81
+	First Fit Decreasing:  93
+	Best Fit:  87
+Test Case  14
+	First Fit:  30
+	First Fit Decreasing:  41
+	Best Fit:  34
+Test Case  15
+	First Fit:  14
+	First Fit Decreasing:  37
+	Best Fit:  32
+Test Case  16
+	First Fit:  7
+	First Fit Decreasing:  13
+	Best Fit:  11
+Test Case  17
+	First Fit:  12
+	First Fit Decreasing:  41
+	Best Fit:  37
+Test Case  18
+	First Fit:  59
+	First Fit Decreasing:  89
+	Best Fit:  84
+Test Case  19
+	First Fit:  23
+	First Fit Decreasing:  43
+	Best Fit:  37
+Test Case  20
+	First Fit:  12
+	First Fit Decreasing:  39
+	Best Fit:  35

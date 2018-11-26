@@ -12,7 +12,7 @@ class Bin:
     def setCap(self,cap):
         self.cap = cap
 
-#read single item 
+#read single item
 def readOne(data):
     item = data.pop(0)
     return item
@@ -33,7 +33,7 @@ def firstFit(capacity,itemCount,weights):
                 placed = True
                 break
         if not placed:
-            #if the item did not fit in the bin, move to the next bin 
+            #if the item did not fit in the bin, move to the next bin
             #and set its capacity removing the current item
             newBin = Bin(capacity - weights[i])
             bins.append(newBin)
@@ -53,20 +53,23 @@ def bestFit(capacity,itemCount,weights):
     bins = []
     newBin = Bin(capacity)
     bins.append(newBin)
-    room = capacity
+    binCount = 1
     for i in range(itemCount):
+        room = capacity
         putHere = 0
         for eachBin in bins:
             if eachBin.cap >= weights[i]:
-                if (eachBin.cap - weights[i]) < room:
-                    room = eachBin.cap - weights[i]
+                newRoom = eachBin.cap - weights[i]
+                if newRoom < room:
+                    room = newRoom
                     putHere = eachBin
         if putHere == 0:
             newBin = Bin(capacity - weights[i])
             bins.append(newBin)
+            binCount += 1
         else:
-            putHere.cap =- weights[i]
-    return len(bins)
+            putHere.cap -= weights[i]
+    return binCount
 
 ####################
 # main
@@ -82,9 +85,9 @@ data = list(map(int,data))
 #process data into variables
 capacity = 0
 itemCount = 0
-weights = []
 testCases = readOne(data)
 for i in range(testCases):
+    weights = []
     capacity = readOne(data)
     itemCount = readOne(data)
     for j in range(itemCount):
@@ -94,4 +97,3 @@ for i in range(testCases):
     print("\tFirst Fit: ", firstFit(capacity,itemCount,weights))
     print("\tFirst Fit Decreasing: ", firstFitDecreasing(capacity,itemCount,weights))
     print("\tBest Fit: ", bestFit(capacity,itemCount,weights))
-
